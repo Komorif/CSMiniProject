@@ -1,0 +1,60 @@
+1
+# User-specific files
+2
+*.suo
+3
+*.user
+4
+*.sln.docstates
+5
+ 
+6
+# Build results
+7
+[Dd]ebug/
+8
+[Rr]elease/
+9
+[Bb]in/
+10
+[Oo]bj/
+11
+ 
+12
+# MSTest test Results
+13
+[Tt]est[Rr]esult*/
+14
+[Bb]uild[Ll]og.*
+15
+ 
+16
+# MSTest test Results
+17
+[Tt]est[Rr]esult*/
+18
+[Bb]uild[Ll]og.*
+19
+ 
+20
+# Remainings from resolving conflicts in Source Control
+21
+*.orig
+22
+ 
+23
+# Visual Studio temp something
+24
+.vs/
+25
+ 
+26
+# Other Extensions
+27
+*.vspscc
+28
+ 
+29
+# NuGet Packages
+30
+**/packages/
