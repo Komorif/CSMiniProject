@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CSminiProject
 {
     internal class Program
     {
+        // Функция Main
         static void Main(string[] args)
         {
+            // данные о игроке
+            int age; // Возраст
+            int hp; // hp
+            string name; // Имя
+
             // Для работы русского языка
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
-
-            // Данные о игроке
-            int age; // Возраст
-            string name; // Имя
-            int hp; // hp
 
             // Рандом
             Random rand = new Random();
@@ -30,12 +33,12 @@ namespace CSminiProject
             int playerMoney = rand.Next(1, 101); // Монеты игрока
             int enemyMoney = rand.Next(1, 101); // Монеты чудовища
 
-
             // Бесконечный цикл
             while (true)
             {
+
                 // Пробел три строки
-                Console.SetCursorPosition(0, 3);
+                Console.SetCursorPosition(0, 2);
 
                 // Цвет текста (белый)
                 Console.ForegroundColor = ConsoleColor.White;
@@ -47,37 +50,53 @@ namespace CSminiProject
 
 
                 // Введите возраст
-                Console.Write("Введите ваш возраст: ");
+                Console.Write($"{name} введите ваш возраст: ");
                 age = Convert.ToInt32(Console.ReadLine());
 
 
                 // Введите hp
-                Console.Write("Сколько у вас HP: ");
+                Console.Write($"{name} сколько у вас HP: ");
                 hp = Convert.ToInt32(Console.ReadLine());
-
+;
 
                 // Проверка возраста или hp (если больше 100 то error 404)
                 if (age > 100 || hp > 100)
                 {
-                    Console.WriteLine("");
+                    // Вызов функции (Death)
+                    Death();
 
-                    // Цвет текста (красный)
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    // Вызоы функции (Time) (1секунда)
+                    Time();
 
-                    Console.WriteLine("error 404\nпроверьте чтобы возраст или hp не превышал 100.\nПопробуй ещё раз.\n\n\n");
+                    Console.WriteLine("error 404");
+
+                    // Вызоы функции (Time) (1секунда)
+                    Time();
+
+                    Console.WriteLine("Проверьте чтобы возраст или hp не превышал 100");
+
+                    // Вызоы функции (Time) (1секунда)
+                    Time();
+
+                    Console.WriteLine("Попробуй ещё раз.\n\n");
                 }
 
 
                 // Если нет ошибок (продолжение бродилки)
                 else
                 {
-                    Console.WriteLine("");
+                    // Вызов функции (BlankLine)
+                    BlankLine(); // Пустая строка
+
+                    // Вызоы функции (Time) (1секунда)
+                    Time();
 
                     // Информация о введён даных (Возраст, Имя, hp)
                     Console.WriteLine("Информация о ввёденых данных");
-                    Console.WriteLine($"Ваш возраст: {age} лет\nИмя: {name}\nHP: {hp}");
+                    Console.WriteLine($"Ваше имя: {name}\nВам: {age} лет\nHP: {hp}");
 
-                    Console.WriteLine("");
+                    // Вызов функции (BlankLine)
+                    BlankLine(); // Пустая строка
 
 
                     // Сюжет (начало)
@@ -85,10 +104,16 @@ namespace CSminiProject
                     // Цвет текста (красный)
                     Console.ForegroundColor = ConsoleColor.Red;
 
+                    // Вызоы функции (Time) (1секунда)
+                    Time();
+
                     Console.WriteLine("Таинственный голос: Вы находитесь в шахте вильямс\nПеред вами большое чудовище называемое Стрит чеир!");
 
                     // Цвет текста (белый)
                     Console.ForegroundColor = ConsoleColor.White;
+
+                    // Вызоы функции (Time) (1секунда)
+                    Time();
 
                     Console.WriteLine($"{name}, что будете делать?\n1.Убежать\n2.Попробовать атаковать");
                     Console.Write("Ваш ответ: ");
@@ -97,10 +122,14 @@ namespace CSminiProject
                     // Выбор (Убежать от чудовища)
                     if (choice1 == 1)
                     {
-                        Console.WriteLine("");
+                        // Вызов функции (BlankLine)
+                        BlankLine(); // Пустая строка
 
                         // Цвет текста (белый)
                         Console.ForegroundColor = ConsoleColor.White;
+
+                        // Вызоы функции (Time) (1секунда)
+                        Time();
 
                         Console.WriteLine($"Вы убежали в страхе от этого чудовища." +
                             $"\n{name}: Ухх устал!");
@@ -108,13 +137,23 @@ namespace CSminiProject
                         // Цвет текста (красный)
                         Console.ForegroundColor = ConsoleColor.Red;
 
+                        // Вызоы функции (Time) (1секунда)
+                        Time();
+
                         Console.WriteLine("Таинственный голос: На вашем пути встетрилось новое чудовище!" +
                             $"\nЧудовище: Давай сыграем в игру мешочек монет");
 
                         // Цвет текста (белый)
                         Console.ForegroundColor = ConsoleColor.White;
 
+                        // Вызоы функции (Time) (1секунда)
+                        Time();
+
                         Console.WriteLine($"{name} сыграешь с противником?\n1.Сыграть\n2.Не играть идти дальше!");
+
+                        // Вызоы функции (Time) (1секунда)
+                        Time();
+
                         Console.Write("Ваш ответ: ");
                         choice2 = Convert.ToInt32(Console.ReadLine());
 
@@ -124,54 +163,86 @@ namespace CSminiProject
                             // Цвет текста (белый)
                             Console.ForegroundColor = ConsoleColor.White;
 
-                            Console.WriteLine("");
+                            // Вызов функции (BlankLine)
+                            BlankLine(); // Пустая строка
+
+                            // Вызоы функции (Time) (1секунда)
+                            Time();
 
                             Console.WriteLine("Правила игры у кого больше монет тот и выиграл!");
 
-                            Console.WriteLine("");
+                            // Вызов функции (BlankLine)
+                            BlankLine(); // Пустая строка
 
                             // Цвет текста (жёлтый)
                             Console.ForegroundColor = ConsoleColor.Yellow;
 
+                            // Вызоы функции (Time) (1секунда)
+                            Time();
+
                             Console.WriteLine($"У вас {playerMoney} монет.");
+
+                            // Вызоы функции (Time) (1секунда)
+                            Time();
+
                             Console.WriteLine($"У врага {enemyMoney} монет.");
 
                             // Проверка монет (если у игрока монет меньше чудовища)
                             if (playerMoney < enemyMoney)
                             {
-                                Console.WriteLine("");
+                                // Вызоы функции (Time) (1секунда)
+                                Time();
 
-                                // Цвет текста (красный)
-                                Console.ForegroundColor = ConsoleColor.Red;
+                                // Вызов функции (Death)
+                                Death();
 
-                                Console.WriteLine($"{name} проиграл.");
-                                Console.WriteLine($"{name} убит чудовищем!\n\n\n");
+                                // Конец
                                 break;
                             }
 
                             // Проверка монет (если у игрока монет больше чудовища)
                             else if (playerMoney > enemyMoney)
                             {
-                                Console.WriteLine("");
-                                
+                                // Вызов функции (BlankLine)
+                                BlankLine(); // Пустая строка
+
                                 // Цвет текста (белый)
                                 Console.ForegroundColor = ConsoleColor.White;
-                                
-                                Console.WriteLine($"{name} одержал победу.");
-                                Console.WriteLine("Продолжение истории следует...\n\n\n");
+
+                                // Вызоы функции (Time) (1секунда)
+                                Time();
+
+                                Console.WriteLine($"{name} одержал(а) победу.");
+
+                                // Вызоы функции (Time) (1секунда)
+                                Time();
+
+                                Console.WriteLine("Продолжение истории следует...\n\n");
+
+                                // Конец
                                 break;
                             }
 
                             // Проверка монет (при ином исходе)
                             else
                             {
-                                Console.WriteLine("");
+                                // Вызов функции (BlankLine)
+                                BlankLine(); // Пустая строка
 
                                 // Цвет текста (белый)
                                 Console.ForegroundColor = ConsoleColor.White;
-                                
+
+                                // Вызоы функции (Time) (1секунда)
+                                Time();
+
                                 Console.WriteLine("Ничья.");
-                                Console.WriteLine("Продолжение истории следует...\n\n\n");
+
+                                // Вызоы функции (Time) (1секунда)
+                                Time();
+
+                                Console.WriteLine("Продолжение истории следует...\n\n");
+
+                                // Конец
                                 break;
                             }
                         }
@@ -179,24 +250,30 @@ namespace CSminiProject
                         // Выбор (попробовать атаковать)
                         else if (choice1 == 2)
                         {
-                            Console.WriteLine("");
-                            
-                            // Цвет текста (красный)
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            
-                            Console.WriteLine($"Злодей безжалостно растоптал {name}.\n\n\n");
+                            // Вызоы функции (Time) (1секунда)
+                            Time();
+
+                            // Вызов функции (Death)
+                            Death();
+
+                            // Конец
                             break;
                         }
 
                         else
                         {
-                            Console.WriteLine("");
-                            
-                            // Цвет текста (красный)
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            // Вызоы функции (Time) (1секунда)
+                            Time();
 
-                            Console.WriteLine("error 462 Вы написали не 1 или 2");
-                            Console.WriteLine($"{name} погиб\n\n\n");
+                            // Вызов функции (Death)
+                            Death();
+
+                            // Вызоы функции (Time) (1секунда)
+                            Time();
+
+                            Console.WriteLine("error 462 Вы написали не 1 или 2\n\n");
+
+                            // Конец
                             break;
                         }
                     }
@@ -204,29 +281,56 @@ namespace CSminiProject
                     // Выбор (Попробовать атаковать)
                     else if (choice1 == 2)
                     {
-                        Console.WriteLine("");
+                        // Вызоы функции (Time) (1секунда)
+                        Time();
 
-                        // Цвет текста (красный)
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        
-                        Console.WriteLine($"{name} был убит чудовищем!\n\n\n");
+                        // Вызов функции (Death)
+                        Death();
+
+                        // Конец
                         break;
                     }
 
                     // Выбор (Не сыграть с чудовищем)
                     else
                     {
-                        Console.WriteLine("");
+                        // Вызоы функции (Time) (1секунда)
+                        Time();
 
-                        // Цвет текста (красный)
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        // Вызов функции (Death)
+                        Death();
 
-                        Console.WriteLine("Вы не написали 1 или 2 за это вам придётся начать с начала (");
-                        Console.WriteLine($"{name} погиб\n\n\n");
+                        // Вызоы функции (Time) (1секунда)
+                        Time();
+
+                        Console.WriteLine("Вы не написали 1 или 2 за это вам придётся начать с начала (\n\n");
+
+                        // Конец
                         break;
                     }
                 }
             }
         }
+
+
+        // Функция (Погиб)
+        static void Death()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\nВы погибли\n\n");
+        }
+
+        // Функция (Пустая строка)        
+        static void BlankLine()
+        {
+            Console.WriteLine("");
+        }
+
+        // Функция (Time)
+        static void Time()
+        {
+            Thread.Sleep(1000);
+        }
+
     }
 }
