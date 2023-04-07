@@ -57,7 +57,7 @@ namespace CSminiProject
                 // Введите hp
                 Console.Write($"{name} сколько у вас HP: ");
                 hp = Convert.ToInt32(Console.ReadLine());
-;
+
 
                 // Проверка возраста или hp (если больше 100 то error 404)
                 if (age > 100 || hp > 100)
